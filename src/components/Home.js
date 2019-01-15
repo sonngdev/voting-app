@@ -3,8 +3,8 @@ import Title from './Title';
 import PollList from './PollList';
 
 class Home extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       polls: [],
       isLoaded: false
@@ -28,12 +28,12 @@ class Home extends Component {
         <Title text="All Polls" />
         {
           this.state.isLoaded
-          ? (<PollList
+          ? <PollList
             polls={this.state.polls}
             username={this.props.username}
             updatePolls={this.updatePolls}
             handleError={this.props.handleError}
-          />)
+          />
           : <h3>Loading...</h3>
         }
 

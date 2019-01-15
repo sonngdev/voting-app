@@ -2,15 +2,15 @@ import React, { Component } from 'react';
 import Title from './Title';
 import Form from './Form';
 
-class LogIn extends Component {
+class SignUp extends Component {
   render() {
     return (
       <div className="container mt-4">
-        <Title text="Log In" />
-        <Form handleSubmit={this.props.handleLogIn} />
+        <Title text="Sign Up" />
+        <Form handleSubmit={this.props.handleSignUp} passwordConfirmation />
       </div>
     )
   }
 }
 
-export default LogIn;
+export default SignUp;

@@ -4,6 +4,7 @@ import UserHeader from './components/UserHeader';
 import GuestHeader from './components/GuestHeader';
 import Home from './components/Home';
 import LogIn from './components/LogIn';
+import SignUp from './components/SignUp';
 
 class App extends Component {
   constructor() {
@@ -14,29 +15,47 @@ class App extends Component {
     if (authToken && username) this.state = { username: username, error: null }
     else this.state = { username: '', error: null };
 
+    this.saveUserInfoAndRedirect = this.saveUserInfoAndRedirect.bind(this);
+    this.removeUserInfo = this.removeUserInfo.bind(this);
+    this.submitForm = this.submitForm.bind(this);
     this.handleLogIn = this.handleLogIn.bind(this);
     this.handleLogOut = this.handleLogOut.bind(this);
+    this.handleSignUp = this.handleSignUp.bind(this);
     this.handleError = this.handleError.bind(this);
   }
 
-  handleLogIn(e) {
+  saveUserInfoAndRedirect(res) {
+    localStorage.setItem("auth_token", res.auth_token);
+    localStorage.setItem("username", res.user.username);
+    this.setState({ username: res.user.username });
+    this.props.history.push("/")
+  }
+
+  submitForm(e, route) {
     e.preventDefault();
     const data = new FormData(e.target);
 
-    fetch(`${process.env.REACT_APP_API_URL}/login`, { method: 'POST', body: data })
+    fetch(process.env.REACT_APP_API_URL + route, { method: 'POST', body: data })
     .then(res => res.json())
-    .then(res => {
-      localStorage.setItem("auth_token", res.auth_token);
-      localStorage.setItem("username", res.user.username);
-      this.setState({ username: res.user.username });
-      this.props.history.push("/")
-    }, this.handleError);
+    .then(this.saveUserInfoAndRedirect, this.handleError);
   }
 
-  handleLogOut() {
+  removeUserInfo() {
     localStorage.removeItem("auth_token");
     localStorage.removeItem("username");
     this.setState({ username: '' });
+  }
+
+  handleLogIn(e) {
+    this.submitForm(e, '/login');
+  }
+
+  handleLogOut() {
+    this.removeUserInfo();
+  }
+
+  handleSignUp(e) {
+    this.submitForm(e, '/signup');
   }
 
   handleError(error) {
@@ -71,6 +90,10 @@ class App extends Component {
             <Route
               path="/login" exact
               render={() => <LogIn handleLogIn={this.handleLogIn} />}
+            />
+            <Route
+              path="/signup" exact
+              render={() => <SignUp handleSignUp={this.handleSignUp} />}
             />
           </Switch>
         </div>

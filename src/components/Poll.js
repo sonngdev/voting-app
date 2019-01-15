@@ -1,17 +1,12 @@
 import React, { Component } from 'react';
 
 class Poll extends Component {
-  constructor() {
-    super();
-    this.handleDeletePoll = this.handleDeletePoll.bind(this);
-  }
-
-  handleDeletePoll(title) {
+  handleDeletePoll(id, title) {
     if (window.confirm(`Delete poll ${title}?`)) {
-      fetch(process.env.REACT_APP_API_URL, {
+      fetch(`${process.env.REACT_APP_API_URL}/my_polls/${id}`, {
         method: "DELETE",
         headers: {
-          "Authorization": document.cookie,
+          "Authorization": localStorage.getItem("auth_token"),
           "Content-Type": "application/json"
         }
       }).then(res => res.json()).then(
@@ -39,7 +34,10 @@ class Poll extends Component {
         {
           createdBy === username &&
           <td>
-            <button className="btn btn-link text-dark" onClick={() => { this.handleDeletePoll(title) }}>Delete</button>
+            <button className="btn btn-link text-dark"
+            onClick={this.handleDeletePoll.bind(this, id, title)}>
+              Delete
+            </button>
           </td>
         }
 
