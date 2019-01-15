@@ -15,8 +15,8 @@ class Poll extends Component {
           "Content-Type": "application/json"
         }
       }).then(res => res.json()).then(
-        polls => { this.props.updatePolls(polls) },
-        error => { this.props.handleError(error) }
+        this.props.updatePolls,
+        this.props.handleError
       )
     }
   }

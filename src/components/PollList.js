@@ -4,7 +4,7 @@ import Poll from './Poll';
 class PollList extends Component {
   render() {
     return (
-      <table className="table table-hover table-light">
+      <table className="table table-light">
         <tbody>
           {
             this.props.polls.map((poll, index) => <Poll
