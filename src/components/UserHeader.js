@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class UserHeader extends Component {
   render() {
     return (
       <nav className="navbar navbar-expand-md navbar-light bg-light">
-        <a className="navbar-brand" href="/">FCC Voting App</a>
+        <Link to="/" className="navbar-brand">FCC Voting App</Link>
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </button>
@@ -12,10 +13,10 @@ class UserHeader extends Component {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav mr-auto">
             <li className="nav-item">
-              <a className="nav-link" href="/my_polls">My Polls</a>
+              <Link to="/my_polls" className="nav-link">My Polls</Link>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="#">New Poll</a>
+              <Link to="/new_poll" className="nav-link">New Polls</Link>
             </li>
           </ul>
 
@@ -24,7 +25,7 @@ class UserHeader extends Component {
               <span className="navbar-text">Hi, {this.props.username}</span>
             </li>
             <li className="nav-item">
-              <a className="nav-link active" href="#" onClick={this.props.handleLogOut}>Log Out</a>
+              <Link to="/" className="nav-link active" onClick={this.props.handleLogOut}>Log Out</Link>
             </li>
           </ul>
         </div>
