@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Title from './Title';
 import PollList from './PollList';
 
-class Home extends Component {
+class UserPolls extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -13,9 +13,12 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    fetch(process.env.REACT_APP_API_URL)
-    .then(res => res.json())
-    .then(this.updatePolls, this.props.handleError)
+    fetch(process.env.REACT_APP_API_URL + "/my_polls", {
+      headers: { "Authorization": localStorage.getItem("auth_token") }
+    }).then(res => res.json()).then(
+      this.updatePolls,
+      this.props.handleError
+    )
   }
 
   updatePolls(polls) {
@@ -25,7 +28,7 @@ class Home extends Component {
   render() {
     return (
       <div className="container mt-4">
-        <Title text="All Polls" />
+        <Title text="My Polls" />
         {
           this.state.isLoaded
           ? <PollList
@@ -41,4 +44,4 @@ class Home extends Component {
   }
 }
 
-export default Home;
+export default UserPolls;

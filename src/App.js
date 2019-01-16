@@ -5,6 +5,7 @@ import GuestHeader from './components/GuestHeader';
 import Home from './components/Home';
 import LogIn from './components/LogIn';
 import SignUp from './components/SignUp';
+import UserPolls from './components/UserPolls';
 
 class App extends Component {
   constructor() {
@@ -94,6 +95,10 @@ class App extends Component {
             <Route
               path="/signup" exact
               render={() => <SignUp handleSignUp={this.handleSignUp} />}
+            />
+            <Route
+              path="/my_polls" exact
+              render={() => <UserPolls username={username} handleError={this.handleError} />}
             />
           </Switch>
         </div>

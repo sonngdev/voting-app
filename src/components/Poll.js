@@ -5,10 +5,7 @@ class Poll extends Component {
     if (window.confirm(`Delete poll ${title}?`)) {
       fetch(`${process.env.REACT_APP_API_URL}/my_polls/${id}`, {
         method: "DELETE",
-        headers: {
-          "Authorization": localStorage.getItem("auth_token"),
-          "Content-Type": "application/json"
-        }
+        headers: { "Authorization": localStorage.getItem("auth_token") }
       }).then(res => res.json()).then(
         this.props.updatePolls,
         this.props.handleError
