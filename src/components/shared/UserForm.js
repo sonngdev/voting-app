@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class Form extends Component {
+class UserForm extends Component {
   validatePassword() {
     const password = document.getElementById("inputPassword");
     const passwordConfirmation = document.getElementById("inputPasswordConfirmation");
@@ -44,4 +44,4 @@ class Form extends Component {
   }
 }
 
-export default Form;
+export default UserForm;

@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { Route, Switch, withRouter } from 'react-router-dom';
-import UserHeader from './components/UserHeader';
-import GuestHeader from './components/GuestHeader';
-import Home from './components/Home';
-import LogIn from './components/LogIn';
-import SignUp from './components/SignUp';
-import UserPolls from './components/UserPolls';
+import UserHeader from './navbars/UserHeader';
+import GuestHeader from './navbars/GuestHeader';
+import Home from './paths/Home';
+import LogIn from './paths/LogIn';
+import SignUp from './paths/SignUp';
+import UserPolls from './paths/UserPolls';
 
 class App extends Component {
   constructor() {

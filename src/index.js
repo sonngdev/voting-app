@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
-import './index.css';
-import App from './App';
+import './stylesheets/index.css';
+import App from './components/App';
 import * as serviceWorker from './serviceWorker';
 require('dotenv').config();
 

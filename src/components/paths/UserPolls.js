@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Title from './Title';
-import PollList from './PollList';
+import Title from '../shared/Title';
+import PollList from '../shared/PollList';
 
 class UserPolls extends Component {
   render() {

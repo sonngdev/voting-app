@@ -16,7 +16,7 @@ class UserHeader extends Component {
               <Link to="/my_polls" className="nav-link">My Polls</Link>
             </li>
             <li className="nav-item">
-              <Link to="/new_poll" className="nav-link">New Polls</Link>
+              <Link to="/new_poll" className="nav-link">New Poll</Link>
             </li>
           </ul>
 

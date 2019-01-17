@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import Title from './Title';
-import Form from './Form';
+import Title from '../shared/Title';
+import UserForm from '../shared/UserForm';
 
 class SignUp extends Component {
   render() {
     return (
       <div className="container mt-4">
         <Title text="Sign Up" />
-        <Form handleSubmit={this.props.handleSignUp} passwordConfirmation />
+        <UserForm handleSubmit={this.props.handleSignUp} passwordConfirmation />
       </div>
     )
   }
