@@ -6,6 +6,7 @@ import Home from './paths/Home';
 import LogIn from './paths/LogIn';
 import SignUp from './paths/SignUp';
 import UserPolls from './paths/UserPolls';
+import NewPoll from './paths/NewPoll';
 
 class App extends Component {
   constructor() {
@@ -104,6 +105,10 @@ class App extends Component {
             <Route
               path="/my_polls" exact
               render={() => <UserPolls username={username} handleError={this.handleError} />}
+            />
+            <Route
+              path="/new_poll" exact
+              render={() => <NewPoll /> }
             />
           </Switch>
         </div>
