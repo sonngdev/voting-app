@@ -6,10 +6,14 @@ class Poll extends Component {
       fetch(`${process.env.REACT_APP_API_URL}/my_polls/${id}`, {
         method: "DELETE",
         headers: { "Authorization": localStorage.getItem("auth_token") }
-      }).then(res => res.json()).then(
-        this.props.updatePolls,
-        this.props.handleError
-      )
+      })
+      .then(async res => {
+        const json = await res.json();
+        if (!res.ok) throw new Error(json.message)
+        else return json
+      })
+      .then(this.props.updatePolls)
+      .catch(this.props.handleError)
     }
   }
 

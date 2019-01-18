@@ -13,8 +13,13 @@ class PollList extends Component {
 
   componentDidMount() {
     fetch(process.env.REACT_APP_API_URL + this.props.path, this.props.options)
-    .then(res => res.json())
-    .then(this.updatePolls, this.props.handleError)
+    .then(async res => {
+      const json = await res.json();
+      if (!res.ok) throw new Error(json.message)
+      else return json
+    })
+    .then(this.updatePolls)
+    .catch(this.props.handleError)
   }
 
   updatePolls(polls) {

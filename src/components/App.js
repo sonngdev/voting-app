@@ -37,8 +37,13 @@ class App extends Component {
     const data = new FormData(e.target);
 
     fetch(process.env.REACT_APP_API_URL + route, { method: 'POST', body: data })
-    .then(res => res.json())
-    .then(this.saveUserInfoAndRedirect, this.handleError);
+    .then(async res => {
+      const json = await res.json();
+      if (!res.ok) throw new Error(json.message)
+      else return json
+    })
+    .then(this.saveUserInfoAndRedirect)
+    .catch(this.handleError)
   }
 
   removeUserInfo() {
@@ -59,8 +64,8 @@ class App extends Component {
     this.submitForm(e, '/signup');
   }
 
-  handleError(error) {
-    this.setState(error)
+  handleError(err) {
+    this.setState({ error: err.message })
   }
 
   render() {
