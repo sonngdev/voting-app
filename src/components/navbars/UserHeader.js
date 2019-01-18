@@ -25,7 +25,7 @@ class UserHeader extends Component {
               <span className="navbar-text">Hi, {this.props.username}</span>
             </li>
             <li className="nav-item">
-              <Link to="/" className="nav-link active" onClick={this.props.handleLogOut}>Log Out</Link>
+              <Link to="/login" className="nav-link active" onClick={this.props.handleLogOut}>Log Out</Link>
             </li>
           </ul>
         </div>

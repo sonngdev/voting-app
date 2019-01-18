@@ -17,34 +17,20 @@ class App extends Component {
     if (authToken && username) this.state = { username: username, error: null }
     else this.state = { username: '', error: null };
 
-    this.saveUserInfoAndRedirect = this.saveUserInfoAndRedirect.bind(this);
+    this.saveUserInfo = this.saveUserInfo.bind(this);
     this.removeUserInfo = this.removeUserInfo.bind(this);
-    this.submitForm = this.submitForm.bind(this);
+    this.redirect = this.redirect.bind(this);
+    this.fetchData = this.fetchData.bind(this);
     this.handleLogIn = this.handleLogIn.bind(this);
     this.handleLogOut = this.handleLogOut.bind(this);
     this.handleSignUp = this.handleSignUp.bind(this);
     this.handleError = this.handleError.bind(this);
   }
 
-  saveUserInfoAndRedirect(res) {
+  saveUserInfo(res) {
     localStorage.setItem("auth_token", res.auth_token);
     localStorage.setItem("username", res.user.username);
     this.setState({ username: res.user.username });
-    this.props.history.push("/")
-  }
-
-  submitForm(e, route) {
-    e.preventDefault();
-    const data = new FormData(e.target);
-
-    fetch(process.env.REACT_APP_API_URL + route, { method: 'POST', body: data })
-    .then(async res => {
-      const json = await res.json();
-      if (!res.ok) throw new Error(json.message)
-      else return json
-    })
-    .then(this.saveUserInfoAndRedirect)
-    .catch(this.handleError)
   }
 
   removeUserInfo() {
@@ -53,16 +39,38 @@ class App extends Component {
     this.setState({ username: '' });
   }
 
-  handleLogIn(e) {
-    this.submitForm(e, '/login');
+  redirect(path) {
+    this.props.history.push(path)
+  }
+
+  fetchData(route, options, fetchSucceeded) {
+    fetch(process.env.REACT_APP_API_URL + route, options)
+    .then(async res => {
+      const json = await res.json();
+      if (!res.ok) throw new Error(json.message)
+      else return json
+    })
+    .then(fetchSucceeded)
+    .catch(this.handleError)
+  }
+
+  handleLogIn(event) {
+    event.preventDefault();
+    const data = new FormData(event.target);
+    this.fetchData('/login', { method: "POST", body: data }, (res) => {
+      this.saveUserInfo(res);
+      this.redirect("/")
+    });
   }
 
   handleLogOut() {
     this.removeUserInfo();
   }
 
-  handleSignUp(e) {
-    this.submitForm(e, '/signup');
+  handleSignUp(event) {
+    event.preventDefault();
+    const data = new FormData(event.target);
+    this.fetchData('/signup', { method: "POST", body: data }, this.saveUserInfoAndRedirect);
   }
 
   handleError(err) {
@@ -92,7 +100,7 @@ class App extends Component {
           <Switch>
             <Route
               path="/" exact
-              render={() => <Home username={username} handleError={this.handleError} />}
+              render={() => <Home username={username} fetchData={this.fetchData} />}
             />
             <Route
               path="/login" exact
@@ -104,11 +112,11 @@ class App extends Component {
             />
             <Route
               path="/my_polls" exact
-              render={() => <UserPolls username={username} handleError={this.handleError} />}
+              render={() => <UserPolls username={username} fetchData={this.fetchData} />}
             />
             <Route
               path="/new_poll" exact
-              render={() => <NewPoll /> }
+              render={() => <NewPoll fetchData={this.fetchData} /> }
             />
           </Switch>
         </div>

@@ -13,7 +13,7 @@ class UserPolls extends Component {
         <Title text="My Polls" />
         <PollList
           username={this.props.username}
-          handleError={this.props.handleError}
+          fetchData={this.props.fetchData}
           path="/my_polls"
           options={requestOptions}
         />

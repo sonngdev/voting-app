@@ -9,7 +9,7 @@ class Home extends Component {
         <Title text="All Polls" />
         <PollList
           username={this.props.username}
-          handleError={this.props.handleError}
+          fetchData={this.props.fetchData}
           path=""
           options={{}}
         />

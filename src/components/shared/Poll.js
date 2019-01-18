@@ -1,19 +1,13 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class Poll extends Component {
   handleDeletePoll(id, title) {
     if (window.confirm(`Delete poll ${title}?`)) {
-      fetch(`${process.env.REACT_APP_API_URL}/my_polls/${id}`, {
+      this.props.fetchData(`/my_polls/${id}`, {
         method: "DELETE",
         headers: { "Authorization": localStorage.getItem("auth_token") }
-      })
-      .then(async res => {
-        const json = await res.json();
-        if (!res.ok) throw new Error(json.message)
-        else return json
-      })
-      .then(this.props.updatePolls)
-      .catch(this.props.handleError)
+      }, this.props.updatePolls)
     }
   }
 
@@ -23,9 +17,7 @@ class Poll extends Component {
       <tr>
         <th scope="row">{index + 1}</th>
         <td>
-          <a className="text-dark" href={`polls/${id}`}>
-            <strong>{title}</strong>
-          </a>
+          <Link to={`polls/${id}`} className="text-dark"><strong>{title}</strong></Link>
           <ul className="list-inline mb-0">
             <li className="list-inline-item"><small>{question}</small></li>
             <li className="list-inline-item"><small>Created by: {createdBy}</small></li>

@@ -12,14 +12,7 @@ class PollList extends Component {
   }
 
   componentDidMount() {
-    fetch(process.env.REACT_APP_API_URL + this.props.path, this.props.options)
-    .then(async res => {
-      const json = await res.json();
-      if (!res.ok) throw new Error(json.message)
-      else return json
-    })
-    .then(this.updatePolls)
-    .catch(this.props.handleError)
+    this.props.fetchData(this.props.path, this.props.options, this.updatePolls)
   }
 
   updatePolls(polls) {
@@ -34,8 +27,9 @@ class PollList extends Component {
           {
             this.state.polls.map((poll, index) => <Poll
               key={poll.title + index}
+              fetchData={this.props.fetchData}
               updatePolls={this.updatePolls}
-              handleError={this.props.handleError}
+
               index={index}
               id={poll.id}
               title={poll.title}
