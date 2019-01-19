@@ -7,6 +7,7 @@ import LogIn from './paths/LogIn';
 import SignUp from './paths/SignUp';
 import UserPolls from './paths/UserPolls';
 import NewPoll from './paths/NewPoll';
+import ShowPoll from './paths/ShowPoll';
 
 class App extends Component {
   constructor() {
@@ -117,6 +118,10 @@ class App extends Component {
             <Route
               path="/new_poll" exact
               render={() => <NewPoll fetchData={this.fetchData} redirect={this.redirect} /> }
+            />
+            <Route
+              path="/polls/:id" exact
+              render={({ match }) => <ShowPoll url={match.url} fetchData={this.fetchData} />}
             />
           </Switch>
         </div>
