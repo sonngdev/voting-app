@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Title from '../shared/Title';
 import VoteForm from '../shared/VoteForm';
-// import PollGraph from '../shard/PollGraph';
+import PollGraph from '../shared/PollGraph';
 
 class ShowPoll extends Component {
   constructor(props) {
@@ -43,7 +43,7 @@ class ShowPoll extends Component {
           </div>
 
           <div className="col-sm-8">
-            {/* <PollGraph /> */}
+            <PollGraph votes={this.state.votes} />
           </div>
         </div>
       </div>
