@@ -116,7 +116,7 @@ class App extends Component {
             />
             <Route
               path="/new_poll" exact
-              render={() => <NewPoll fetchData={this.fetchData} /> }
+              render={() => <NewPoll fetchData={this.fetchData} redirect={this.redirect} /> }
             />
           </Switch>
         </div>

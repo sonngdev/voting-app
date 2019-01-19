@@ -4,15 +4,13 @@ class PollForm extends Component {
   constructor() {
     super();
     this.state = {
-      title: '',
-      question: '',
       votes: []
     }
     this.addVoteOption = this.addVoteOption.bind(this);
-    this.inputChange = this.inputChange.bind(this);
+    this.voteNameChange = this.voteNameChange.bind(this);
     this.voteForOption = this.voteForOption.bind(this);
     this.unvoteForOption = this.unvoteForOption.bind(this);
-    this.deleteOption = this.deleteOption.bind(this);
+    this.removeVoteOption = this.removeVoteOption.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -22,7 +20,7 @@ class PollForm extends Component {
     })
   }
 
-  inputChange(event, index) {
+  voteNameChange(event, index) {
     this.setState({
       votes: this.state.votes.map((v, i) => {
         if (i === index) return { name: event.target.value, times: v.times };
@@ -49,14 +47,22 @@ class PollForm extends Component {
     })
   }
 
-  deleteOption(index) {
+  removeVoteOption(index) {
     this.setState({
       votes: this.state.votes.filter((v, i) => i !== index)
     })
   }
 
-  handleSubmit() {
-
+  handleSubmit(event) {
+    event.preventDefault();
+    const data = new FormData(event.target);
+    this.props.fetchData("/my_polls", {
+      method: "POST",
+      body: data,
+      headers: { "Authorization": localStorage.getItem("auth_token") }
+    }, res => {
+      this.props.redirect(`my_polls/${res.id}`)
+    })
   }
 
   render() {
@@ -83,16 +89,18 @@ class PollForm extends Component {
           this.state.votes.map((vote, i) => (
             <div key={`vote${i}`} className="form-group">
               <label htmlFor={"inputVote" + i} className="d-block">Vote option {i + 1}</label>
-              <input type="text" className="form-control d-inline-block w-75"
-                id={"inputVote" + i} placeholder={`Option ${i+1}`} value={vote.name}
-                onChange={e => this.inputChange(e, i)}
+              <input name="votes_attributes[][name]" type="text"
+                className="form-control d-inline-block w-75"
+                id={"inputVote" + i} placeholder={`Option ${i + 1}`}
+                onChange={e => this.voteNameChange(e, i)}
               />
+              <input name="votes_attributes[][times]" type="hidden" value={vote.times} />
               {
                 vote.times
                 ? <button type="button" className="btn btn-link" onClick={() => this.unvoteForOption(i)}>Unvote</button>
                 : <button type="button" className="btn btn-link" onClick={() => this.voteForOption(i)}>Vote</button>
               }
-              <button type="button" className="btn btn-link text-danger" onClick={() => this.deleteOption(i)}>Delete option</button>
+              <button type="button" className="btn btn-link text-danger" onClick={() => this.removeVoteOption(i)}>Remove option</button>
             </div>
           ))
         }

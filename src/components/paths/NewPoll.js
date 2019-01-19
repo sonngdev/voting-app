@@ -7,7 +7,7 @@ class NewPoll extends Component {
     return (
       <div className="container mt-4">
         <Title text="New Poll" />
-        <PollForm />
+        <PollForm fetchData={this.props.fetchData} redirect={this.props.redirect} />
       </div>
     )
   }
