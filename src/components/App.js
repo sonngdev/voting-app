@@ -71,7 +71,10 @@ class App extends Component {
   handleSignUp(event) {
     event.preventDefault();
     const data = new FormData(event.target);
-    this.fetchData('/signup', { method: "POST", body: data }, this.saveUserInfoAndRedirect);
+    this.fetchData('/signup', { method: "POST", body: data }, (res) => {
+      this.saveUserInfo(res);
+      this.redirect("/")
+    });
   }
 
   handleError(err) {
