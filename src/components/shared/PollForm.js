@@ -61,7 +61,7 @@ class PollForm extends Component {
       body: data,
       headers: { "Authorization": localStorage.getItem("auth_token") }
     }, res => {
-      this.props.redirect(`my_polls/${res.id}`)
+      this.props.redirect(`polls/${res.id}`)
     })
   }
 
@@ -87,12 +87,12 @@ class PollForm extends Component {
 
         {
           this.state.votes.map((vote, i) => (
-            <div key={`vote${i}`} className="form-group">
+            <div key={"option" + i} className="form-group">
               <label htmlFor={"inputVote" + i} className="d-block">Vote option {i + 1}</label>
               <input name="votes_attributes[][name]" type="text"
                 className="form-control d-inline-block w-75"
                 id={"inputVote" + i} placeholder={`Option ${i + 1}`}
-                onChange={e => this.voteNameChange(e, i)}
+                onChange={e => this.voteNameChange(e, i)} value={vote.name} autoFocus
               />
               <input name="votes_attributes[][times]" type="hidden" value={vote.times} />
               {

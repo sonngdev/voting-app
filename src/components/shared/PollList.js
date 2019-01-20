@@ -9,6 +9,7 @@ class PollList extends Component {
       isLoaded: false
     };
     this.updatePolls = this.updatePolls.bind(this);
+    this.deletePoll = this.deletePoll.bind(this);
   }
 
   componentDidMount() {
@@ -19,6 +20,12 @@ class PollList extends Component {
     this.setState({ polls: polls, isLoaded: true })
   }
 
+  deletePoll(pollId) {
+    this.setState({
+      polls: this.state.polls.filter(poll => poll.id !== pollId)
+    })
+  }
+
   render() {
     return this.state.isLoaded
     ? (
@@ -27,8 +34,7 @@ class PollList extends Component {
           {
             this.state.polls.map((poll, index) => <Poll
               key={poll.title + index}
-              fetchData={this.props.fetchData}
-              updatePolls={this.updatePolls}
+              deletePoll={this.deletePoll}
 
               index={index}
               id={poll.id}

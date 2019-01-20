@@ -4,10 +4,11 @@ import { Link } from 'react-router-dom';
 class Poll extends Component {
   handleDeletePoll(id, title) {
     if (window.confirm(`Delete poll ${title}?`)) {
-      this.props.fetchData(`/my_polls/${id}`, {
+      fetch(process.env.REACT_APP_API_URL + `/my_polls/${id}`, {
         method: "DELETE",
         headers: { "Authorization": localStorage.getItem("auth_token") }
-      }, this.props.updatePolls)
+      })
+      .then(res => { if (res.ok) this.props.deletePoll(id) })
     }
   }
 
