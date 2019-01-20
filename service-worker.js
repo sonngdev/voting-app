@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/fcc-voting-app/precache-manifest.8b64ff798d736790dd7369eca1ff876e.js"
+  "/fcc-voting-app/precache-manifest.58611ff0fa8da0ab0bbc238f1d5f43de.js"
 );
 
 workbox.clientsClaim();
