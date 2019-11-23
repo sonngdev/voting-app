@@ -1,15 +1,15 @@
 {
-  "main.css": "/fcc-voting-app/static/css/main.fb20e327.chunk.css",
-  "main.js": "/fcc-voting-app/static/js/main.ded5eceb.chunk.js",
-  "main.js.map": "/fcc-voting-app/static/js/main.ded5eceb.chunk.js.map",
-  "static/css/1.55256f04.chunk.css": "/fcc-voting-app/static/css/1.55256f04.chunk.css",
-  "static/js/1.88f5a149.chunk.js": "/fcc-voting-app/static/js/1.88f5a149.chunk.js",
-  "static/js/1.88f5a149.chunk.js.map": "/fcc-voting-app/static/js/1.88f5a149.chunk.js.map",
-  "runtime~main.js": "/fcc-voting-app/static/js/runtime~main.8d43f34c.js",
-  "runtime~main.js.map": "/fcc-voting-app/static/js/runtime~main.8d43f34c.js.map",
-  "static/css/1.55256f04.chunk.css.map": "/fcc-voting-app/static/css/1.55256f04.chunk.css.map",
-  "static/css/main.fb20e327.chunk.css.map": "/fcc-voting-app/static/css/main.fb20e327.chunk.css.map",
-  "index.html": "/fcc-voting-app/index.html",
-  "precache-manifest.58611ff0fa8da0ab0bbc238f1d5f43de.js": "/fcc-voting-app/precache-manifest.58611ff0fa8da0ab0bbc238f1d5f43de.js",
-  "service-worker.js": "/fcc-voting-app/service-worker.js"
+  "main.css": "/voting-app/static/css/main.41383b8e.chunk.css",
+  "main.js": "/voting-app/static/js/main.b88510c7.chunk.js",
+  "main.js.map": "/voting-app/static/js/main.b88510c7.chunk.js.map",
+  "static/css/1.e18e8450.chunk.css": "/voting-app/static/css/1.e18e8450.chunk.css",
+  "static/js/1.27cb2bfa.chunk.js": "/voting-app/static/js/1.27cb2bfa.chunk.js",
+  "static/js/1.27cb2bfa.chunk.js.map": "/voting-app/static/js/1.27cb2bfa.chunk.js.map",
+  "runtime~main.js": "/voting-app/static/js/runtime~main.b2269169.js",
+  "runtime~main.js.map": "/voting-app/static/js/runtime~main.b2269169.js.map",
+  "static/css/1.e18e8450.chunk.css.map": "/voting-app/static/css/1.e18e8450.chunk.css.map",
+  "static/css/main.41383b8e.chunk.css.map": "/voting-app/static/css/main.41383b8e.chunk.css.map",
+  "index.html": "/voting-app/index.html",
+  "precache-manifest.9010d2a47ac047e24918ef295dfc0294.js": "/voting-app/precache-manifest.9010d2a47ac047e24918ef295dfc0294.js",
+  "service-worker.js": "/voting-app/service-worker.js"
 }
